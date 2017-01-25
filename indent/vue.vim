@@ -8,7 +8,7 @@ if exists("b:did_indent")
 endif
 
 " Load indent files for required languages
-for language in ['stylus', 'pug', 'css', 'javascript', 'html', 'coffee']
+for language in ['stylus', 'pug', 'css', 'javascript', 'html', 'typescript']
   unlet! b:did_indent
   exe "runtime! indent/".language.".vim"
   exe "let s:".language."indent = &indentexpr"
@@ -29,8 +29,8 @@ function! GetVueIndent()
     exe "let indent = ".s:stylusindent
   elseif searchpair('<style', '', '</style>', 'bWr')
     exe "let indent = ".s:cssindent
-  elseif searchpair('<script lang="coffee"', '', '</script>', 'bWr')
-    exe "let indent = ".s:coffeeindent
+  elseif searchpair('<script lang="ts"', '', '</script>', 'bWr')
+    exe "let indent = ".s:javascriptindent
   elseif searchpair('<script', '', '</script>', 'bWr')
     exe "let indent = ".s:javascriptindent
   else

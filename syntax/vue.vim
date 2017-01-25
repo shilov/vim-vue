@@ -25,7 +25,7 @@ if !exists("s:syntaxes")
     return syntaxes
   endfunction
 
-  let s:syntaxes = s:search_syntaxes('pug', 'slm', 'coffee', 'stylus', 'sass', 'scss', 'less')
+  let s:syntaxes = s:search_syntaxes('pug', 'slm', 'ts', 'stylus', 'sass', 'scss', 'less')
 endif
 
 
@@ -58,14 +58,13 @@ if exists("b:current_syntax")
 endif
 syntax region javascript keepend matchgroup=Delimiter start=/<script\( lang="babel"\)\?\( type="text\/babel"\)\?>/ end="</script>" contains=@JS fold
 
-if s:syntaxes.coffee
-  syntax include @COFFEE syntax/coffee.vim
-  if exists("b:current_syntax")
-    unlet b:current_syntax
-  endif
-  " Matchgroup seems to be necessary for coffee
-  syntax region coffee keepend matchgroup=Delimiter start="<script lang=\"coffee\">" end="</script>" contains=@COFFEE fold
+" if s:syntaxes.typescript
+syntax include @TYPESCRIPT syntax/typescript.vim
+if exists("b:current_syntax")
+  unlet b:current_syntax
 endif
+" Matchgroup seems to be necessary for coffee
+syntax region typescript keepend matchgroup=Delimiter start="<script lang=\"ts\">" end="</script>" contains=@TYPESCRIPT fold
 
 syntax include @CSS syntax/css.vim
 if exists("b:current_syntax")
